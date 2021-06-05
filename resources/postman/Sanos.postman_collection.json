@@ -1,0 +1,230 @@
+{
+	"info": {
+		"_postman_id": "a9a5ef42-7e92-4876-a0dc-92c51be1915b",
+		"name": "Sanos",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Auth",
+					"item": [
+						{
+							"name": "Login",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"tests[\"response code is 200\"] = responseCode.code === 200;",
+											"",
+											"try { ",
+											"    var json = JSON.parse(responseBody);",
+											"    tests['response is valid JSON'] = true;",
+											"    tests['access is present'] = _.has(json, 'access');",
+											"    ",
+											"    postman.setEnvironmentVariable(\"access_jwt_token\", json.access);",
+											"}",
+											"catch (e) { ",
+											"    tests['error: ' + e] = false;",
+											"}"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"username\": \"app@app\",\n\t\"password\": \"app\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/user/jwt/create",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"user",
+										"jwt",
+										"create"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Puffs",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_jwt_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/puffs",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"puffs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Frequencies (Last Hour by Minute)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_jwt_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/puffs?from_ago=1h&group_by=1m",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"puffs"
+							],
+							"query": [
+								{
+									"key": "from_ago",
+									"value": "1h"
+								},
+								{
+									"key": "group_by",
+									"value": "1m"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Frequencies (Last Day by Hour)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_jwt_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/puffs?from_ago=1d&group_by=1h",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"puffs"
+							],
+							"query": [
+								{
+									"key": "from_ago",
+									"value": "1d"
+								},
+								{
+									"key": "group_by",
+									"value": "1h"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Frequencies (Last Week by Day)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_jwt_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/puffs?from_ago=1w&group_by=1d",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"puffs"
+							],
+							"query": [
+								{
+									"key": "from_ago",
+									"value": "1w"
+								},
+								{
+									"key": "group_by",
+									"value": "1d"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Healthcheck",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}",
+					"host": [
+						"{{url}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

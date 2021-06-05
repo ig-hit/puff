@@ -1,0 +1,102 @@
+swagger: '2.0'
+info:
+  title: Sanos API
+  description: description
+  termsOfService: https://www.google.com/policies/terms/
+  contact:
+    email: contact@snippets.local
+  license:
+    name: BSD License
+  version: v1
+basePath: /
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  JWT:
+    name: Authorization
+    type: apiKey
+    in: header
+    description: JWT Token
+security:
+  - JWT: []
+paths:
+  /:
+    get:
+      operationId: _list
+      description: Health check
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      tags:
+        - ''
+    parameters: []
+  /puffs:
+    get:
+      operationId: puffs_list
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Puff'
+      tags:
+        - puffs
+    post:
+      operationId: puffs_create
+      description: ''
+      parameters:
+        - name: data
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Puff'
+      responses:
+        '201':
+          description: ''
+          schema:
+            $ref: '#/definitions/Puff'
+      tags:
+        - puffs
+    parameters: []
+  /userjwt/create:
+    post:
+      operationId: userjwt_create_create
+      description: ''
+      parameters:
+        - name: data
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/TokenObtainPair'
+      responses:
+        '201':
+          description: ''
+          schema:
+            $ref: '#/definitions/TokenObtainPair'
+      tags:
+        - userjwt
+    parameters: []
+definitions:
+  Puff:
+    type: object
+    properties: {}
+  TokenObtainPair:
+    required:
+      - username
+      - password
+    type: object
+    properties:
+      username:
+        title: Username
+        type: string
+        minLength: 1
+      password:
+        title: Password
+        type: string
+        minLength: 1
