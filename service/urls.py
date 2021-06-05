@@ -11,5 +11,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', puff_views.home, name='home'),
     path('puffs', include(puff_urls.urlpatterns)),
-    path('user', include(user_urls.urlpatterns)),
+    path('users', include(user_urls.urlpatterns)),
 ]

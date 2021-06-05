@@ -1,4 +1,3 @@
-#from django.contrib.auth import models
 from rest_framework import exceptions
 from rest_framework_simplejwt import (
     authentication as jwt_authentication,
@@ -25,7 +24,7 @@ class AppUserAuthenticator(backends.BaseBackend):
             return user
 
     def can_authenticate(self, user):
-        return user.is_active
+        return user and user.is_active
 
 
 class TokenAuth(jwt_authentication.JWTAuthentication):

@@ -97,7 +97,6 @@ REST_FRAMEWORK = {
         'anon': '100/day',
         'user': '100000/day',
     },
-    'UNAUTHENTICATED_USER': None,
 }
 
 SIMPLE_JWT = {
