@@ -49,3 +49,7 @@ Argument values:<br>
 `h`: hours<br>
 `d`: days<br>
 `w`: weeks<br>
+
+**Admin UI:**<br>
+http://127.0.0.1:4600/admin/ <br>
+`sanos:sanossanos`
