@@ -48,12 +48,12 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}/user/jwt/create",
+									"raw": "{{url}}/users/jwt/create",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
-										"user",
+										"users",
 										"jwt",
 										"create"
 									]

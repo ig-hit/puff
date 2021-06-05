@@ -15,12 +15,12 @@ Available in [resources/swagger](./resources/swagger)
 
 
 **Postman endpoints:**<br>
-Load [collection](./resources/postman)
+Load [collection && environment](./resources/postman)
 
 **CURL:**<br>
 **Login**:
 ```bash
-curl --location --request POST 'http://localhost:4600/user/jwt/create' \
+curl --location --request POST 'http://localhost:4600/users/jwt/create' \
 --header 'Content-Type: application/json' \
 --data-raw '{
 	"username": "app@app",
